@@ -1,0 +1,5 @@
+package com.Inventory.DTO;
+
+public class InventoryDTO {
+
+}

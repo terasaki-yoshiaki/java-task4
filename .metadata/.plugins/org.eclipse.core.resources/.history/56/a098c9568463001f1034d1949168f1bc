@@ -1,0 +1,5 @@
+package com.Inventory.DAO.copy;
+
+public class InventoryDAO {
+
+}

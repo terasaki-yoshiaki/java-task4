@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登録フォーム</title>
+<link rel="stylesheet" href="todo.css" type="text/css">
+<script src="todo.js"></script>
+<style>
+	
+   h1{
+	      text-align:center;
+	    }
+
+    p{
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+	<h1>新規登録</h1>	
+	<form th:action="?" method="post">
+  		<table border="1">
+      			<pform action="?" method="get" th:object="${param}">
+					<p><label for="select">取引日</label>
+			  	       <input type="date" name="TradingDate" id="TradingDate" required></p>
+        			<p><div id="validate_msg"></div></p>
+        			<p>商品名<input type="text" class="textbox" id="ProductName" name="ProductName" required></p>
+        			<p><div id="validate_msg1"></div></p>
+        			<p>JANコード<input type="text" class="textbox" id="JanCode" name="JanCode" required></p>
+        			<p><div id="validate_msg2"></div></p>
+        			<p>仕入れ価格<input type="text" class="textbox" id="Price" name="Price" required></p>
+        			<p><div id="validate_msg3"></div></p>
+        			<p>仕入れ数量<input type="text" class="textbox" id="InventoryBuy" name="InventoryBuy" required></p>
+        			<p><div id="validate_msg4"></div></p>
+        			<p>販売価格<input type="text" class="textbox" id="InventorySell" name="InventorySell" required></p>
+        			<p><div id="validate_msg5"></div></p>
+        			<p>利益<input type="text" class="textbox" id="Profit" name="Profit" required></p>
+        			<p><div id="validate_msg6"></div></p>
+        			
+      			</form>
+  		</table><br/>
+	</form>
+	<p><input type="submit" id="b1" value="登録" onclick="check()" formaction="/ic">
+  	<input type="button" onclick="check()" value="帳簿に戻る" formaction="/back">
+</body>
+</html>

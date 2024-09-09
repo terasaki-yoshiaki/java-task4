@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="?" method="post">
+	<table border="5" class="design08" height="100">
+	 <tr>
+	  <th>ユーザー名</th>
+	  <th>パスワード</th>
+	  <th>管理権限</th>
+	  </tr>
+	 <tr th:each="Inventory : ${Inventory}" height="50">
+		 <form action="?" method="post" th:object="${param}">
+	  <td><input type="text" class="label" name="UserName" th:value="${Inventory.UserName}"></td>
+	  <td><input type="text" class="label" name="Password" th:value="${Inventory.Password}"></td>
+	  <td><input type="text" class="label" name="Authority" th:value="${Inventory.Aouthority}"></td>
+	  <td><input type="submit" id="a1" value="編集" onclick="check()" formaction="/AccountUpdate"></td>
+	    <td><input type="submit" id="c1" value="削除" onclick="check()" formaction="/AccountDelete"></td>
+	 </form>
+	 </tr>
+	 
+	</table>
+	
+	<p><input type="submit" id="b1" value="登録" onclick="check()" formaction="/accountCreate"></p>
+	<p></p>
+    <div th:replace="master::footer"></div>
+</body>
+</html>

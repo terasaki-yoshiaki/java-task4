@@ -1,0 +1,23 @@
+package com.Inventory.Model.DTO;
+
+import lombok.Data;
+
+public class InventoryDTO {
+
+	
+
+
+
+
+	 
+	//InventoryDTOクラス*/
+	@Data
+	public class TodoListDTO {
+	    private int ID;
+	    private String Todo;
+	    private String Place;
+	    private String Datetime;
+	    private String Memo;
+	}
+
+}

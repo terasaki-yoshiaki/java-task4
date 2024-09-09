@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head> charset="UTF-8">
+<title>帳簿</title>
+<style>
+	.design08 {
+		 width: 100%;
+		 text-align: center;
+		 border-collapse: collapse;
+		 border-spacing: 0;
+		}
+		.design08 th {
+		 padding: 10px;
+		 background: #778ca3;
+		 border: solid 1px #666666;
+		 color: #ffffff;
+		}
+		.design08 td {
+		 padding: 10px;
+		 border: solid 1px #666666;
+		}
+		.design08 td:first-child {
+		 background: #e9faf9;
+		}
+	</style>
+	</head>
+<body>
+	<table class="XXX">
+	 <tr>
+	  <th>A</th>
+	  <th>B</th>
+	  <th>C</th>
+	  </tr>
+	 <tr>
+	  <td>D</td>
+	  <td>E</td>
+	  <td>F</td>
+	 </tr>
+	 <tr>
+	  <td>G</td>
+	  <td>H</td>
+	  <td>I</td>
+	 </tr>
+	 <tr>
+	  <td>J</td>
+	  <td>K</td>
+	  <td>L</td>
+	 </tr>
+	</table>
+	</body>
+</html>

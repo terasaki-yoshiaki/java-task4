@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会員登録フォーム</title>
+<style>
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: lightgreen;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+form {
+background-color: #fff;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+width: 400px;
+}
+
+h2 {
+text-align: center;
+color: #4CAF50;
+margin-bottom: 20px;
+}
+
+label {
+display: block;
+margin: 15px 0 5px;
+font-weight: bold;
+color: #555;
+}
+
+input, select {
+width: 100%;
+padding: 10px;
+margin-bottom: 15px;
+box-sizing: border-box;
+border: 1px solid #ccc;
+border-radius: 6px;
+}
+
+button {
+background-color: #4CAF50;
+color: #fff;
+padding: 12px 20px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+width: 100%;
+display: inline-block;
+}
+
+button:hover {
+background-color: #45a049;
+}
+</style>
+</head>
+<body>
+
+<form>
+<h2>会員登録フォーム</h2>
+
+<label for="name">名前:</label>
+<input type="text" id="name" name="name" placeholder="山田 太郎" required>
+
+<label for="kana">フリガナ:</label>
+<input type="text" id="kana" name="kana" placeholder="ヤマダ タロウ" required>
+
+<label for="email">メールアドレス:</label>
+<input type="email" id="email" name="email" placeholder="example@example.com" required>
+
+<label for="phone">電話番号:</label>
+<input type="tel" id="phone" name="phone" placeholder="012-3456-7890" required>
+
+<label for="password">パスワード:</label>
+<input type="password" id="password" name="password" placeholder="********" required>
+
+<label for="newsletter">メルマガ受信の有無:</label>
+<select id="newsletter" name="newsletter" required>
+<option value="yes">受信する</option>
+<option value="no">受信しない</option>
+</select>
+
+<button type="submit">登録する</button>
+</form>
+
+</body>
+</html>/html>

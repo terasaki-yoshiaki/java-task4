@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登録フォーム</title>
+<link href="Inventory.css" >
+<script src="Inventory.js"></script>
+<div class="container">
+    <form>
+      <p class="fsize">ログイン画面</p>
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button type="submit">ログイン</button>
+    </form>
+  </div>
+</body>
+</html>

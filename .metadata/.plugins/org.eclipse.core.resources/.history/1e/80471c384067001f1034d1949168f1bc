@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>編集</title>
+<link rel="stylesheet" href="todo.css" type="text/css">
+</head>
+<body>
+	<h1>編集</h1>	
+	<form action="?" method="post">
+  		<table border="1">
+      			<form action="?" method="post" th:object="${param}">
+					<p>番号：<input type="text" class="textbox" name="ID" ></p>
+        			<p>予定：<input type="text" class="textbox" name="Todo"  ></p>
+        			<p>場所：<input type="text" class="textbox" name="Place"  ></p>
+        			<p>日時：<input type="date" class="textbox" name="Datetime"  ></p>
+        			<p>備考：<input type="text" class="textbox" name="Memo" ></p>
+      			</form>
+  		</table><br/>
+	</form>
+  	<input type="submit" value="更新" formaction="/custom" </td>
+  	<input type="submit" value="戻る" formaction="index.html"></td>
+</body>
+</html>
