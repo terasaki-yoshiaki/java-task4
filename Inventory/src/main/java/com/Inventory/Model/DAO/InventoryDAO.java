@@ -70,6 +70,7 @@ public class InventoryDAO {
 		}
 		
 		
+		
 		//ListSearch.html:日付を選択して一覧に表示する
 		public ArrayList<InventoryDTO> select1(InventoryDTO dto) {
 			// ステートメントはSQLを実行するオブジェクト
@@ -176,30 +177,36 @@ public class InventoryDAO {
 					String un = dto.getUserName();
 					String pw = dto.getPassword();
 					String au = dto.getAuthority();
+					int au1;
+					if(au == "yes") {
+						au1 = 1;
+					} else {
+						au1 = 0;
+					}
 					 LocalDateTime nd = LocalDateTime.now();
 					 
 					
-					String sql = String.valueOf("INSERT\n" 
-							+"INTO M_USER(\n" 
-								    +"USER_NAME\n"
-								    +", PASSWORD\n"
-								    +", AUTHORITY\n"
-								    +", DELETE_FRAG\n"
-								    +", CREATED_DATE\n"
-								    +", CREATED_NAME\n"
-								    +", UPDATED_DAT\n"
-								    +", UPDATED_NAME\n"
-								+")\n" 
-								+"VALUES (\n" 
-								    +"'"+un+"'\n"
-								    +"'"+pw+"'\n"
-								    +"'"+au+"'\n"
-								    +"'1'\n"
-								    +"'"+nd+"'\n"
-								    +"'terasaki'\n"
-								    +"'"+nd+"'\n"
-								    +"'terasaki'\n"
-								+");" );
+					String sql = String.valueOf("INSERT\n"
+							+ "INTO M_USER(\n"
+							+ "USER_NAME\n"
+							+ ",PASSWORD\n"
+							+ ",AUTHORITY\n"
+							+ ",DELETE_FRAG\n"
+							+ ",CREATED_DATE\n"
+							+ ",CREATED_NAME\n"
+							+ ",UPDATED_DATE\n"
+							+ ",UPDATED_NAME\n"
+							+ ")\n"
+							+ "VALUES (\n"
+							+ "'"+un+"'\n"
+							+ ",'"+pw+"'\n"
+							+ ",'"+au1+"'\n"
+							+ ",'1'\n"
+							+ ",'"+nd+"'\n"
+							+ ",'terasaki'\n"
+							+ ",'"+nd+"'\n"
+							+ ",'terasaki'\n"
+							+ ")");
 								   
 					try {
 						// DB接続のメソッドを呼び出す
@@ -250,6 +257,7 @@ public class InventoryDAO {
 							
 						while (rs.next()) {
 							InventoryDTO a4 = new InventoryDTO();
+							a4.setID(rs.getInt("ID"));
 							a4.setUserName(rs.getString("user_name"));
 							a4.setPassword(rs.getString("password"));
 							a4.setAuthority(rs.getString("authority"));
@@ -308,8 +316,8 @@ public class InventoryDAO {
 								   +" , '"+jan+"'\n"
 								   +" , '"+pr+"'\n"
 								   +" , '"+ib+"'\n"
-								   +"  , '"+is+"'\n"
-								   +"  , '0'\n"
+								   +" , '"+is+"'\n"
+								   +" , '0'\n"
 								   +" , '0'\n"
 								   +" , '"+nd+"'\n"
 								   +" , 'terasaki'\n"
@@ -344,20 +352,24 @@ public class InventoryDAO {
 			return;
 		}
 
-		public void update(InventoryDTO dto) {
-			// TODO 自動生成されたメソッド・スタブ
+		public void update2(InventoryDTO dto) {
+			
 			Statement stmt = null;
-
 			//dtoから各項目の値を取り出す get
 			int ID = dto.getID();
-			//String to = dto.getTodo();
-			//String pl = dto.getPlace();
-			//String da = dto.getDatetime();
-			//String me = dto.getMemo();
-			
-			String sql = "UPDATE \n"
-			//		+ "SET todo='"+to+"',place='"+pl+"',date_time='"+da+"',memo='"+me+"'\n"
-					+ "WHERE id='"+ID+"'";
+			String un = dto.getUserName();
+			String pw = dto.getPassword();
+			String a = dto.getAuthority();
+			LocalDateTime nd = LocalDateTime.now();
+			String sql = "UPDATE M_USER\n"
+					+"SET USER_NAME='"+un+"'\n"
+					+", PASSWORD='"+pw+"'\n"
+					+", AUTHORITY='"+a+"'\n"
+					+", DELETE_FRAG='1'\n"
+					+", CREATED_NAME='terasaki'\n"
+					+", UPDATED_DATE='"+nd+"'\n"
+					+", UPDATED_NAME='saki'\n"
+					+"WHERE ID='"+ID+"'";
 			
 			
 			try {
@@ -382,21 +394,123 @@ public class InventoryDAO {
 			}
 		}
 
+		/*//InventoryList.html→商品一覧から編集
+		public void update1(InventoryDTO dto) {
+			// TODO 自動生成されたメソッド・スタブ
+			Statement stmt = null;
+
+			//dtoから各項目の値を取り出す get
+			int ID = dto.getID();
+			String jan = dto.getJanCode();
+			int pr = dto.getPrice();
+			int ib = dto.getInventoryBuy();
+			int is = dto.getInventorySell();
+			int pf = dto.getProfit();
+			String sql = "UPDATE PRODUCT_DETAIL\n"
+					+ "SET user_name='"+un+"',password='"+ps+"',authority='"+a+"'\n"
+					+ "WHERE id='"+ID+"'";
+			
+			try {
+				// DB接続のメソッドを呼び出す
+				connect();
+
+				// ステートメントを作成
+				stmt = con.createStatement();
+
+				// SQLを実行し結果をリザルトセットへ格納
+				stmt.executeUpdate(sql);
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}*/
+		
+		
+		//InventoryList.html→商品一覧から編集
+				public void update(InventoryDTO dto) {
+					// TODO 自動生成されたメソッド・スタブ
+					Statement stmt = null;
+
+					//dtoから各項目の値を取り出す get
+					int ID = dto.getID();
+					int p = dto.getPrice();
+					int ib = dto.getInventoryBuy();
+					int is = dto.getInventorySell();
+					int pf = dto.getProfit();
+					
+					String sql = "UPDATE M_USER\n"
+							+ "SET price='"+p+"',inventory_buy='"+ib+"',inventory_sell='"+is+"',profit='"+pf+"'\n"
+							+ "WHERE id='"+ID+"'";
+					
+					try {
+						// DB接続のメソッドを呼び出す
+						connect();
+
+						// ステートメントを作成
+						stmt = con.createStatement();
+
+						// SQLを実行し結果をリザルトセットへ格納
+						stmt.executeUpdate(sql);
+					
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							stmt.close();
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+		
+		//accountlist.html:ユーザー一覧から１列削除
+		public void delete(InventoryDTO dto) {
+			// TODO 自動生成されたメソッド・スタブ
+			Statement stmt = null;
+
+			//dtoから各項目の値を取り出す get
+			int ID = dto.getID();
+			String sql = "DELETE FROM M_USER\n"
+					+ "WHERE id='"+ID+"'";
+			
+			try {
+				// DB接続のメソッドを呼び出す
+				connect();
+
+				// ステートメントを作成
+				stmt = con.createStatement();
+
+				// SQLを実行し結果をリザルトセットへ格納
+				stmt.executeUpdate(sql);
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			}
+		
 		//InventoryList.html:商品一覧から１列削除
-	public void delete(InventoryDTO dto) {
-		// TODO 自動生成されたメソッド・スタブ
+	public void delete1(InventoryDTO dto) {
 		Statement stmt = null;
 
 		//dtoから各項目の値を取り出す get
 		int ID = dto.getID();
-		//String to = dto.getTodo();
-		//String pl = dto.getPlace();
-		//String da = dto.getDatetime();
-		//String me = dto.getMemo();
-		
-		String sql = "DELETE FROM kadai3.todolist\n"
+		String sql = "DELETE FROM PRODUCT_DETAIL\n"
 				+ "WHERE id='"+ID+"'";
-		
 		
 		try {
 			// DB接続のメソッドを呼び出す

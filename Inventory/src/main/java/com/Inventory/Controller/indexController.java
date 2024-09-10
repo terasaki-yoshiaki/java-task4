@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -35,5 +36,11 @@ public class indexController {
 	        List<InventoryDTO> list = dao.select3();
 	        model.addAttribute("Inventory", list);
 	        	return "accountlist.html";
+			}
+	    
+	    
+	    @GetMapping("/")
+	    public String index() {
+	        	return "index.html";
 			}
 }

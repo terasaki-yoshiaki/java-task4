@@ -18,9 +18,9 @@
 </head>
 <body>
 	<h1>新規登録</h1>	
-	<form th:action="?" method="post">
+	<form action="?" method="post">
   		<table border="1">
-      			<pform action="?" method="get" th:object="${param}">
+      			<form action="?" method="get" th:object="${param}">
 					<p><label for="select">取引日</label>
 			  	       <input type="date" name="TradingDate" id="TradingDate" required></p>
         			<p><div id="validate_msg"></div></p>

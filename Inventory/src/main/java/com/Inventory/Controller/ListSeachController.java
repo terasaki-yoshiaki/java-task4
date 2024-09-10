@@ -22,13 +22,13 @@ public class ListSeachController {
 	        if(TD != null) {
 	        	return "ListSearch.html";
 	        } else {
-				return "redirect:/";
+				return "redirect:ListSeach.html";
 			}
 }
 
 
 		@PostMapping("/decision")
-		public String InvetoryList(Model model) {
+		public String InventoryList(Model model) {
 			List<InventoryDTO> list = dao.select2();
 			model.addAttribute("Inventory", list);
 			return "InventoryList.html";

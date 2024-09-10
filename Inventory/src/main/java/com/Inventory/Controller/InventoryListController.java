@@ -1,13 +1,14 @@
 package com.Inventory.Controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.Inventory.Model.DAO.InventoryDAO;
 import com.Inventory.Model.DTO.InventoryDTO;
-
-import ch.qos.logback.core.model.Model;
 
 @Controller
 public class InventoryListController {
@@ -27,32 +28,35 @@ public class InventoryListController {
 		}
 	}
 
-    @PostMapping("/InventoryCreate")
-    public String InventoryCreate() {
-        return "form.html";
-    }
+   
+    @PostMapping("/IC")
+    public String index() {
+        	return "form.html";
+		}
     
+    @PostMapping("/iup")
+   	//DTOからDAOへ
+   	public String IU(@ModelAttribute InventoryDTO dto, Model model) {
+           
+           //DAOを呼び出して処理
+          InventoryDAO InventoryDAO = new InventoryDAO();
+           InventoryDAO.update(dto);
+           List<InventoryDTO> list = dao.select2();
+			model.addAttribute("Inventory", list);
+			return "InventoryList.html";
+		}
+   	
     
-    @PostMapping("/Inventorydelete")
+    @PostMapping("/ide")
 	//DTOからDAOへ
-	public String delete(@ModelAttribute InventoryDTO dto, Model model) {
+	public String IDe(@ModelAttribute InventoryDTO dto, Model model) {
         
         //DAOを呼び出して処理
         InventoryDAO InventoryDAO = new InventoryDAO();
-        InventoryDAO.delete(dto);
-        //getMappingの処理を同じ処理をさせたい
-        return "redirect:/InventoryList.html";
+        InventoryDAO.delete1(dto);
+        List<InventoryDTO> list = dao.select2();
+		model.addAttribute("Inventory", list);
+		return "InventoryList.html";
+	}
     }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
