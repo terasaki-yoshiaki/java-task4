@@ -65,6 +65,7 @@
 	<script src="Inventory.js"></script>
 
 <body>
+	<p th:if="${ErrorMessage!=null}" th:text="${ErrorMessage}"><!--ログインエラーの際はエラーメッセージを表示する　-->
 	<div class="container">
 		<form action="?" method="post">
 			<table border="1">

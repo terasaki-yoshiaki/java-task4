@@ -3,10 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>登録フォーム</title>
-<link rel="stylesheet" href="todo.css" type="text/css">
-<script src="todo.js"></script>
+<link rel="stylesheet"  type="text/css">
+<!--<script src="Inventory.js"></script>-->
 <style>
-	
+	.design08 {
+		 width: 10%;
+		 text-align: center;
+		 border-collapse: collapse;
+		 border-spacing: 0;
+		}
+		.design08 th {
+		 padding: 1px;
+		 background: #778ca3;
+		 border: solid 1px #666666;
+		 color: #ffffff;
+		}
+		.design08 td {
+		 padding: 1px;
+		 border: solid 1px #666666;
+		}
+		.design08 td:first-child {
+		 
+		}
+		
+		#center{
+        margin: auto;
+    }
+    
    h1{
 	      text-align:center;
 	    }
@@ -14,33 +37,45 @@
     p{
       text-align:center;
     }
+    
+    .textbox{
+         border: none;
+}
   </style>
 </head>
 <body>
-	<h1>新規登録</h1>	
+	<h1>商品登録</h1>	
 	<form action="?" method="post">
-  		<table border="1">
-      			<form action="?" method="get" th:object="${param}">
-					<p><label for="select">取引日</label>
-			  	       <input type="date" name="TradingDate" id="TradingDate" required></p>
+	<table border="1" class="design08" style="text-align:center" id="center">
+				<tr>	
+					<th>取引日</th>
+        			<th>商品名</th>
+        			<th>JANコード</th>
+        			<th>仕入れ価格</th>
+        			<th>仕入れ数量</th>
+        			<th>販売価格</th>
+        			<th>利益</th>
+        			</tr>
+      			<form action="?" method="post" th:object="${param}">
+					<td><label for="select"></label>
+			  	       <input type="date" name="TradingDate"  class="textbox" id="TradingDate" required></td>
         			<p><div id="validate_msg"></div></p>
-        			<p>商品名<input type="text" class="textbox" id="ProductName" name="ProductName" required></p>
+        			<td><input type="text" class="textbox" id="ProductName" name="ProductName" required></td>
         			<p><div id="validate_msg1"></div></p>
-        			<p>JANコード<input type="text" class="textbox" id="JanCode" name="JanCode" required></p>
+        			<td><input type="text" class="textbox" id="JanCode" name="JanCode" required></td>
         			<p><div id="validate_msg2"></div></p>
-        			<p>仕入れ価格<input type="text" class="textbox" id="Price" name="Price" required></p>
+        			<td><input type="text" class="textbox" id="Price" name="Price" required></td>
         			<p><div id="validate_msg3"></div></p>
-        			<p>仕入れ数量<input type="text" class="textbox" id="InventoryBuy" name="InventoryBuy" required></p>
+        			<td><input type="text" class="textbox" id="InventoryBuy" name="InventoryBuy" required></td>
         			<p><div id="validate_msg4"></div></p>
-        			<p>販売価格<input type="text" class="textbox" id="InventorySell" name="InventorySell" required></p>
+        			<td><input type="text" class="textbox" id="InventorySell" name="InventorySell" required></td>
         			<p><div id="validate_msg5"></div></p>
-        			<p>利益<input type="text" class="textbox" id="Profit" name="Profit" required></p>
+        			<td><input type="text" class="textbox" id="Profit" name="Profit" required></td>
         			<p><div id="validate_msg6"></div></p>
-        			
-      			</form>
+        		</form>
   		</table><br/>
 	</form>
-	<p><input type="submit" id="b1" value="登録" onclick="check()" formaction="/ic">
-  	<input type="button" onclick="check()" value="帳簿に戻る" formaction="/back">
+      			<td><input type="submit" id="b1"  value="登録する" onclick="check()" formaction="/ic"></td>
+  				<td><button type="button" id="b1" onclick="history.back()">帳簿に戻る</button></td>
 </body>
 </html>

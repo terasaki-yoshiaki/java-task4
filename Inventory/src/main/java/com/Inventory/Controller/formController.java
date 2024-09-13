@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,16 +25,17 @@ public class formController {
         //DAOを呼び出して処理
         InventoryDAO InventoryDAO = new InventoryDAO();
         InventoryDAO.insert1(dto);
-		List<InventoryDTO> list = dao.select2();
+		List<InventoryDTO> list = dao.select2(dto);
 		model.addAttribute("Inventory", list);
 			return "InventoryList.html";
-
-/*
-	@PostMapping("/back")
-	public String back() {
-    return ;
-	}*/
+	} else {
+		return "form.html";
+}
 	}
-		return null;
+
+
+	@GetMapping("/back")
+	public String back() {
+		return "InventoryList.html";
 }
 }

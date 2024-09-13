@@ -5,29 +5,37 @@
 <title>帳簿</title>
 <style>
 	.design08 {
-		 width: 100%;
+		 width: 10%;
 		 text-align: center;
 		 border-collapse: collapse;
 		 border-spacing: 0;
 		}
 		.design08 th {
-		 padding: 10px;
+		 padding: 1px;
 		 background: #778ca3;
 		 border: solid 1px #666666;
 		 color: #ffffff;
 		}
 		.design08 td {
-		 padding: 6px;
+		 padding: 1px;
 		 border: solid 1px #666666;
 		}
-		.design08 td:first-child {
-		 background: #e9faf9;
-		}
+		
+		
+		#center{
+        margin: auto;
+    }
+    
+        .label{
+         border: none;
+         
+}
 	</style>
 	</head>
+	
 <body>
 	<form action="?" method="post">
-	<table border="2" class="design08" height="100">
+	<table border="6" class="design08" id="center">
 	 <tr>
 	  <th>番号</th>
 	  <th>商品名</th>
@@ -36,8 +44,9 @@
 	  <th>仕入れ数量</th>
 	  <th>販売数量</th>
 	  <th>利益</th>
+	  
 	  </tr>
-	 <tr th:each="Inventory : ${Inventory}" height="50">
+	 <tr th:each="Inventory : ${Inventory}" height="1">
 		 <form action="?" method="post" th:object="${param}">
 	  <td><input type="text" class="label" name="ID" th:value="${Inventory.ID}"></td>
 	  <td><input type="text" class="label" name="ProductName" th:value="${Inventory.ProductName}"></td>
@@ -46,15 +55,16 @@
 	  <td><input type="text" class="label" name="InventoryBuy" th:value="${Inventory.InventoryBuy}"></td>
 	  <td><input type="text" class="label" name="InventorySell" th:value="${Inventory.InventorySell}"></td>
 	  <td><input type="text" class="label" name="Profit" th:value="${Inventory.Profit}"></td>
+	  <td><input type="hidden" class="label" name="TradingDate" th:value="${Inventory.TradingDate}"></td>
 	  <td><input type="submit" id="IUp" value="編集" onclick="check()" formaction="/iup"></td>
 	  <td><input type="submit" id="IDe" value="削除" onclick="check()" formaction="/ide"></td>
 	 </form>
 	 </tr>
 	 
 	</table>
-	
-	<p><input type="submit" id="b1" value="商品登録" onclick="check()" formaction="/IC"></p>
-	<p></p>
+	<td></td>
+	<td><input type="submit" id="b1" value="商品登録" onclick="check()" formaction="/IC"></td>
+	<td><input type="submit" id="b1" value="CSV出力" onclick="check()" formaction="/csvdownload"></td>
     <div th:replace="master::footer"></div>
     </body>
 </html>
