@@ -18,7 +18,7 @@ import lombok.Data;
 	    private int InventoryBuy;
 	    private int InventorySell;
 	    private int Profit;
-	    private String Authority;
+	    private int Authority;
 		}
 	
 

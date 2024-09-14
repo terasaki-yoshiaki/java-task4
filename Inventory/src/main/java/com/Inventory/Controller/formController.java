@@ -1,17 +1,20 @@
-/*package com.Inventory.Controller;
+package com.Inventory.Controller;
+
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.Inventory.Model.DAO.InventoryDAO;
 import com.Inventory.Model.DTO.InventoryDTO;
 
-import ch.qos.logback.core.model.Model;
-
 @Controller
 public class formController {
-
+	 InventoryDAO dao = new InventoryDAO();
+	 
 	private static final String InventoryDTO = null;
 	
 	@PostMapping("/ic")
@@ -22,17 +25,17 @@ public class formController {
         //DAOを呼び出して処理
         InventoryDAO InventoryDAO = new InventoryDAO();
         InventoryDAO.insert1(dto);
-        //getMappingの処理を同じ処理をさせたい
-		} else {
-			return "redirect:InventoryList.html";
-		}
-        return "Inventory.html";
+		List<InventoryDTO> list = dao.select2(dto);
+		model.addAttribute("Inventory", list);
+			return "InventoryList.html";
+	} else {
+		return "form.html";
+}
 	}
 
-/*
-	@PostMapping("/back")
+
+	@GetMapping("/back")
 	public String back() {
-    return ("'welcome'");
-	}
+		return "InventoryList.html";
 }
-*/
+}

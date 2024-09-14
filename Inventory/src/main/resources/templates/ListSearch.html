@@ -4,10 +4,32 @@
 <meta charset="UTF-8">
 <title>ListSearch</title>
 <link rel="stylesheet" href="Inventory.css" type="text/css">
+<style>
+	.design08 {
+		 width: 100%;
+		 text-align: center;
+		 border-collapse: collapse;
+		 border-spacing: 0;
+		}
+		.design08 th {
+		 padding: 10px;
+		 background: #778ca3;
+		 border: solid 1px #666666;
+		 color: #ffffff;
+		}
+		.design08 td {
+		 padding: 6px;
+		 border: solid 1px #666666;
+		}
+		.design08 td:first-child {
+		 background: #e9faf9;
+		}
+	</style>
 <body>
 	<h1>リスト検索</h1>	
+	<p th:if="${ErrorMessage!=null}" th:text="${ErrorMessage}"><!--ログインエラーの際はエラーメッセージを表示する　-->
 	<form action="?" method="post" th:object="${param}">
-  		<table border="1">
+  		<table border="7" class="design08">
 			  <label for="select">日付を選ぶ</label>
 			  <input type="date" name="TradingDate" id="TradingDate" required>
 			  <input type="submit" value="検索" formaction="/listselect"  >
@@ -17,14 +39,13 @@
     		</tr>
     		<tr th:each="Inventory : ${Inventory}" >
       			<form action="?" method="post" th:object="${param}">
-      				<td><input type="text" class="label" name="ID" th:value="${Inventory.TradingDate}"></td>
-        			<td><input type="submit" value="決定" formaction="/decision" id="TradingDate"></td>
+      				<td><input type="text" style="text-align:center" class="label" name="TradingDate" th:value="${Inventory.TradingDate}"></td>
+        			<td><input type="submit" value="決定" formaction="/decision" ></td>
+        			<td><input type="hidden" id="TradingDate" name="TradingDate" th:value="${Inventory.TradingDate}"></td>
       			</form>
     		</tr>
   		</table><br/>
-	</form>
-  	
-  	<p></p>
+	
     <div th:replace="master::footer"></div>
 </body>
 </html>
