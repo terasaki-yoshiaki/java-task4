@@ -60,17 +60,15 @@ public class ListSearchTest {
         mockList.add(mockInventory);
         
         //dao.select1(dto) が呼ばれた場合に、先ほど作成した mockList を返すように設定
-        when(dao.select1(dto)).thenReturn(mockList);
+        when(dao.select1(dto)).thenReturn(expectedList);
 
         // Act
      // メソッドの実行
         String viewName = listSearchController.InventoryList(dto, model, request, response, session);
 
-        // Assert
-        //結果が "ListSearch.html" であることを確認
-        assertEquals("ListSearch.html", viewName);
-        //モックの model に対して、"Inventory" という属性名で mockList が追加されたことを確認
-        verify(model).addAttribute("Inventory", mockList);
+        // 結果の検証
+        assertEquals("InventoryList.html", viewName);
+        verify(model).addAttribute("Inventory", expectedList);
     }
 
     @Test

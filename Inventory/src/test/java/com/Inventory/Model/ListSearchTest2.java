@@ -6,11 +6,13 @@ import static org.mockito.Mockito.*;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
 import com.Inventory.Controller.ListSearchController;
@@ -21,8 +23,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+@ExtendWith(MockitoExtension.class)
 public class ListSearchTest2 {
 
+	//private AutoCloseable closeable;
     @InjectMocks
     private ListSearchController listSearchController;
 
@@ -32,9 +36,15 @@ public class ListSearchTest2 {
     @Mock
     private Model model;
 
+    
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+      //  closeable = MockitoAnnotations.openMocks(this);
+    }
+    
+    @AfterEach
+    void tearDown() throws Exception {
+    //	closeable.close();
     }
 
     @Test
