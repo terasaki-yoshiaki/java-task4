@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <product_detail>
+        <TRADING_DATE>2024-09-19</TRADING_DATE>
+        <JAN_CODE>1234567890123</JAN_CODE>
+        <PRICE>1000</PRICE>
+        <INVENTORY_BUY>500</INVENTORY_BUY>
+        <INVENTORY_SELL>300</INVENTORY_SELL>
+        <PROFIT>200</PROFIT>
+    </product_detail>
+    <m_user>
+        <ID>1</ID>
+        <USER_NAME>testUser</USER_NAME>
+        <PASSWORD>password</PASSWORD>
+        <AUTHORITY>1</AUTHORITY>
+    </m_user>
+</dataset>

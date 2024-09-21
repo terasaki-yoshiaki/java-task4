@@ -2,7 +2,7 @@
  * 
  */
 function check() {
-	alert('登録ボタン押されたよ');
+	//alert('登録ボタン押されたよ');
 	let result0 = TradingDateCheck();
 	document.getElementById("validate_msg").innerHTML = result0;
 	let result1 = ProductNameCheck();
@@ -17,7 +17,7 @@ function check() {
 	document.getElementById("validate_msg5").innerHTML = result5;
 	let result6 = ProfitCheck();
 	document.getElementById("validate_msg6").innerHTML = result6;
-	alert('チェック2');
+	//alert('チェック2');
 	/*
 	if(document.getElementById("TradingDate").value == "") {
 		flag = 1;
@@ -41,12 +41,11 @@ function check() {
 								} else {
 									return true;
 								}*/
-	if (result0 != "" && result1 != "" && result2 != "" && result3 != "" && result4 != "" && result5 != "" && result6 != "") {
-		alert('通過');
-		return true;	
+	if (result0 != "" || result1 != "" || result2 != "" || result3 != "" || result4 != "" || result5 != "" || result6 != "") {
+		return false;	
 	} 
-		alert('停止');
-	return false;
+
+	return true;
 }
  alert('チェック');
 function TradingDateCheck() {

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>登録フォーム</title>
 <link rel="stylesheet"  type="text/css">
-<!--<script src="Inventory.js"></script>-->
+<script src="Inventory.js"></script>
 <style>
 	.design08 {
 		 width: 10%;
@@ -58,24 +58,24 @@
         			</tr>
       			<form action="?" method="post" th:object="${param}">
 					<td><label for="select"></label>
-			  	       <input type="date" name="TradingDate"  class="textbox" id="TradingDate" required></td>
+			  	       <input type="date" name="TradingDate"  class="textbox" id="TradingDate" ></td>
         			<p><div id="validate_msg"></div></p>
-        			<td><input type="text" class="textbox" id="ProductName" name="ProductName" required></td>
+        			<td><input type="text" class="textbox" id="ProductName" name="ProductName" ></td>
         			<p><div id="validate_msg1"></div></p>
-        			<td><input type="text" class="textbox" id="JanCode" name="JanCode" required></td>
+        			<td><input type="text" class="textbox" id="JanCode" name="JanCode" ></td>
         			<p><div id="validate_msg2"></div></p>
-        			<td><input type="text" class="textbox" id="Price" name="Price" required></td>
+        			<td><input type="text" class="textbox" id="Price" name="Price" ></td>
         			<p><div id="validate_msg3"></div></p>
-        			<td><input type="text" class="textbox" id="InventoryBuy" name="InventoryBuy" required></td>
+        			<td><input type="text" class="textbox" id="InventoryBuy" name="InventoryBuy" ></td>
         			<p><div id="validate_msg4"></div></p>
-        			<td><input type="text" class="textbox" id="InventorySell" name="InventorySell" required></td>
+        			<td><input type="text" class="textbox" id="InventorySell" name="InventorySell" ></td>
         			<p><div id="validate_msg5"></div></p>
-        			<td><input type="text" class="textbox" id="Profit" name="Profit" required></td>
+        			<td><input type="text" class="textbox" id="Profit" name="Profit" ></td>
         			<p><div id="validate_msg6"></div></p>
         		</form>
   		</table><br/>
 	</form>
-      			<td><input type="submit" id="b1"  value="登録する" onclick="check()" formaction="/ic"></td>
+      			<td><input type="submit" id="b1"  value="登録する" onclick="return check()" formaction="/ic"></td>
   				<td><button type="button" id="b1" onclick="history.back()">帳簿に戻る</button></td>
 </body>
 </html>

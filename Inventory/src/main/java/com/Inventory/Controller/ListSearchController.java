@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class ListSeachController {
+public class ListSearchController {
 	 InventoryDAO dao = new InventoryDAO();
 
 	    @PostMapping("/listselect")

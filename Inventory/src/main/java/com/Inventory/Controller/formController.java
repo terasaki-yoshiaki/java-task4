@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.Inventory.Model.DAO.InventoryDAO;
 import com.Inventory.Model.DTO.InventoryDTO;
 
+
 @Controller
+
 public class formController {
 	 InventoryDAO dao = new InventoryDAO();
 	 
@@ -21,15 +23,17 @@ public class formController {
 	
 	//DTOからDAOへ
 	public String form(@ModelAttribute InventoryDTO dto, Model model) {
-		if(dto != null ) {
+		if(dto == null ) {
+			return "form.html";
+		} else {
         //DAOを呼び出して処理
         InventoryDAO InventoryDAO = new InventoryDAO();
         InventoryDAO.insert1(dto);
 		List<InventoryDTO> list = dao.select2(dto);
 		model.addAttribute("Inventory", list);
 			return "InventoryList.html";
-	} else {
-		return "form.html";
+	
+		
 }
 	}
 
