@@ -37,7 +37,7 @@ public class InventoryDAO {
 			ResultSet rs = null;
 			String un = dto.getUserName();
 			String pw = dto.getPassword();
-			String sql = "SELECT * FROM M_USER WHERE USER_NAME = '"+un+"'AND PASSWORD = '"+pw+"'";
+			String sql = "SELECT * FROM m_user WHERE user_name = '"+un+"'AND password = '"+pw+"'";
 			ArrayList<InventoryDTO> list = new ArrayList<InventoryDTO>();
 
 			try {
@@ -50,9 +50,9 @@ public class InventoryDAO {
 					
 				while (rs.next()) {
 					InventoryDTO a1 = new InventoryDTO();
-					a1.setUserName(rs.getString("USER_NAME"));
-					a1.setPassword(rs.getString("PASSWORD"));
-					a1.setAuthority(rs.getInt("AUTHORITY"));
+					a1.setUserName(rs.getString("user_name"));
+					a1.setPassword(rs.getString("password"));
+					a1.setAuthority(rs.getInt("authority"));
 					list.add(a1);
 				}
 				
@@ -79,7 +79,7 @@ public class InventoryDAO {
 					ResultSet rs = null;
 					String un = dto.getUserName();
 					String pw = dto.getPassword();
-					String sql = "SELECT * FROM M_USER WHERE USER_NAME = '"+un+"'AND PASSWORD = '"+pw+"'";
+					String sql = "SELECT * FROM m_user WHERE user_name = '"+un+"'AND password = '"+pw+"'";
 					ArrayList<InventoryDTO> list = new ArrayList<InventoryDTO>();
 
 					try {
@@ -92,9 +92,9 @@ public class InventoryDAO {
 							
 						while (rs.next()) {
 							InventoryDTO a4 = new InventoryDTO();
-							a4.setUserName(rs.getString("USER_NAME"));
-							a4.setPassword(rs.getString("PASSWORD"));
-							a4.setAuthority(rs.getInt("AUTHORITY"));
+							a4.setUserName(rs.getString("user_name"));
+							a4.setPassword(rs.getString("password"));
+							a4.setAuthority(rs.getInt("authority"));
 							list.add(a4);
 						}
 						
@@ -120,7 +120,7 @@ public class InventoryDAO {
 			ResultSet rs = null;
 			
 			Date td = dto.getTradingDate();
-			String sql = "SELECT * FROM PRODUCT_DETAIL WHERE TRADING_DATE = '"+td+"'";
+			String sql = "SELECT * FROM product_detail WHERE trading_date = '"+td+"'";
 			ArrayList<InventoryDTO> list = new ArrayList<InventoryDTO>();
 
 			try {

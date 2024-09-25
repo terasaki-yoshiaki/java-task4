@@ -1,5 +1,0 @@
-package com.Inventory.Model.DAO.DataBase.DTO;
-
-public class InventoryDAO {
-
-}

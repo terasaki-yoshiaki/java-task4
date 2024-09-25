@@ -29,12 +29,11 @@ public class ListSearchDBTest3 {
 
     private IDatabaseTester databaseTester;
     
-	private InventoryDAO dao;
-    private ListSearchController listSearchController; // コントローラのインスタンス
+	private ListSearchController listSearchController; // コントローラのインスタンス
 
     @BeforeEach
     public void setUp() throws Exception {
-        dao = new InventoryDAO();
+        new InventoryDAO();
         listSearchController = new ListSearchController();
 
         // DBUnitの設定
@@ -59,7 +58,7 @@ public class ListSearchDBTest3 {
         //databaseTester.setSchema("mysql"); // スキーマを明示的に設定
         
         //ListSearch.xmlというXMLファイルからデータセットを作成します。これにより、テストデータをデータベースに挿入
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("ListSearch.xml"));
+        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("ListSearch2.xml"));
         //データセットをテストオブジェクトに設定
         databaseTester.setDataSet(dataSet);
         //テスト実行前にデータベースをクリアし、新しいデータを挿入する操作を指定

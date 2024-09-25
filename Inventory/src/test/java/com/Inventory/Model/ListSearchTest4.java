@@ -1,5 +1,6 @@
 package com.Inventory.Model;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.Date;
@@ -40,19 +41,17 @@ public class ListSearchTest4 extends DBTestCase {
 
     @BeforeEach
     public void setUp() throws Exception {
-        // DBUnitのセットアップ
         databaseTester = new JdbcDatabaseTester(
-            "com.mysql.cj.jdbc.Driver",   // 使用しているJDBCドライバ
-            "jdbc:mysql://localhost:3306/mysql",  // データベースのURL
-            "root",                        // データベースのユーザー名
-            "password"                     // データベースのパスワード
+            "com.mysql.cj.jdbc.Driver",
+            "jdbc:mysql://localhost:3306/mysql",
+            "root",
+            "password"
         );
         IDataSet dataSet = getDataSet();
         databaseTester.setDataSet(dataSet);
         databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         databaseTester.onSetup();
     }
-
 
     @Override
     protected IDataSet getDataSet() throws Exception {
@@ -62,30 +61,25 @@ public class ListSearchTest4 extends DBTestCase {
 
     @Test
     public void testListSearch() {
-        // テストデータの準備
         InventoryDTO dto = new InventoryDTO();
-        dto.setTradingDate(Date.valueOf("2024-09-19")); // 検索する日付
+        dto.setTradingDate(Date.valueOf("2024-09-19"));
 
         ArrayList<InventoryDTO> expectedList = new ArrayList<>();
         InventoryDTO item = new InventoryDTO();
         item.setTradingDate(Date.valueOf("2024-09-19"));
         expectedList.add(item);
 
-        // DAOのメソッドが呼ばれたときの戻り値を設定
         when(inventoryDAO.select1(dto)).thenReturn(expectedList);
 
         Model model = mock(Model.class);
-        // メソッドの実行
         String viewName = listSearchController.ListSearch(dto, model);
 
-        // 結果の検証
         assertEquals("ListSearch.html", viewName);
         verify(model).addAttribute("Inventory", expectedList);
     }
 
     @Test
     public void testInventoryList() throws Exception {
-        // テストデータの準備
         InventoryDTO dto = new InventoryDTO();
         dto.setUserName("testUser");
         dto.setTradingDate(Date.valueOf("2024-09-19"));
@@ -94,9 +88,8 @@ public class ListSearchTest4 extends DBTestCase {
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
 
-        // セッションの権限を設定
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("Authority")).thenReturn("1"); // 管理者権限
+        when(session.getAttribute("Authority")).thenReturn("1");
 
         ArrayList<InventoryDTO> expectedList = new ArrayList<>();
         InventoryDTO item = new InventoryDTO();
@@ -104,21 +97,17 @@ public class ListSearchTest4 extends DBTestCase {
         item.setProductName("Test Product");
         expectedList.add(item);
 
-        // DAOのメソッドが呼ばれたときの戻り値を設定
         when(inventoryDAO.select2(dto)).thenReturn(expectedList);
 
         Model model = mock(Model.class);
-        // メソッドの実行
         String viewName = listSearchController.InventoryList(dto, model, request, response, session);
 
-        // 結果の検証
         assertEquals("InventoryList.html", viewName);
         verify(model).addAttribute("Inventory", expectedList);
     }
 
     @Test
     public void testInventoryListNoAuthority() throws Exception {
-        // テストデータの準備
         InventoryDTO dto = new InventoryDTO();
         dto.setUserName("testUser");
 
@@ -126,15 +115,12 @@ public class ListSearchTest4 extends DBTestCase {
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
 
-        // セッションの権限を設定
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("Authority")).thenReturn("0"); // 権限なし
+        when(session.getAttribute("Authority")).thenReturn("0");
 
         Model model = mock(Model.class);
-        // メソッドの実行
         String viewName = listSearchController.InventoryList(dto, model, request, response, session);
 
-        // 結果の検証
         assertEquals("ListSearch.html", viewName);
         verify(model).addAttribute("ErrorMessage", "*閲覧権限がない為、表示できません");
     }

@@ -3,7 +3,6 @@ package com.Inventory.Model;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.io.IOException;
 //java.sql.Date や ArrayList、List をインポートする。日付やリストを扱うために必要
@@ -24,6 +23,9 @@ import com.Inventory.Model.DAO.InventoryDAO;
 import com.Inventory.Model.DTO.InventoryDTO;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ListSearchTest {
 
@@ -60,15 +62,18 @@ public class ListSearchTest {
         mockList.add(mockInventory);
         
         //dao.select1(dto) が呼ばれた場合に、先ほど作成した mockList を返すように設定
-        when(dao.select1(dto)).thenReturn(expectedList);
+        when(dao.select1(dto)).thenReturn(mockList);
 
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession session = mock(HttpSession.class);
         // Act
      // メソッドの実行
-        String viewName = listSearchController.InventoryList(dto, model, request, response, session);
+        String viewName = ListSearchController.ListSearch(dto, model);
 
         // 結果の検証
         assertEquals("InventoryList.html", viewName);
-        verify(model).addAttribute("Inventory", expectedList);
+        verify(model).addAttribute("Inventory", mockList);
     }
 
     @Test
@@ -82,9 +87,11 @@ public class ListSearchTest {
         //dao.select1(dto) が呼ばれた場合に、空のリストを返すように設定
         when(dao.select1(dto)).thenReturn(new ArrayList<>());
 
-        // Act
+        ListSearchController listSearchController = null;
+		// Act
         //ListSeachController の ListSearch メソッドを呼び出し、その結果を result に格納
-        String result = istSearchController.ListSearch(dto, model);
+        @SuppressWarnings("null")
+		String result = listSearchController.ListSearch(dto, model);
 
         // Assert
         //結果が "ListSearch.html" であることを確認

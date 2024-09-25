@@ -2,6 +2,10 @@ package com.Inventory.Model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 import org.dbunit.IDatabaseTester;
@@ -11,65 +15,65 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.Inventory.Controller.ListSearchController;
 import com.Inventory.Model.DAO.InventoryDAO;
 import com.Inventory.Model.DTO.InventoryDTO;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ListSearchDBTest {
 
-    @Autowired
-    private ListSearchController listSeachController;
-
     private InventoryDAO dao;
 
-    @BeforeEach  //各テストメソッドの前に実行される
+    // DatabaseDBTestクラスを外に出す
+    static class DatabaseDBTest {
+        private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        private static final String JDBC_URL = "jdbc:mysql://localhost:3306/mysql";
+        private static final String USER = "root";
+        private static final String PASSWORD = "root";
+
+        public static void initializeDatabase() throws Exception {
+            Class.forName(JDBC_DRIVER);
+            IDatabaseTester databaseTester = new JdbcDatabaseTester(JDBC_DRIVER, JDBC_URL, USER, PASSWORD);
+
+            new JdbcDatabaseTester(JDBC_DRIVER, JDBC_URL, USER, PASSWORD).getConnection();
+            IDataSet dataSet = new FlatXmlDataSetBuilder()
+            	    .build(DatabaseDBTest.class.getClassLoader().getResourceAsStream("ListSearch2.xml"));
+
+            databaseTester.setDataSet(dataSet);
+            databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+            databaseTester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
+            databaseTester.onSetup();
+            
+        }
+            
+        
+        
+    @BeforeEach
     public void setUp() throws Exception {
         dao = new InventoryDAO();
-        // DBUnitの設定
-        //JdbcDatabaseTester を使ってデータベーステストを初期化
-        IDatabaseTester databaseTester = new JdbcDatabaseTester(
-        	//MySQLデータベースに接続するためのJDBCドライバー、URL、ユーザー名、パスワードを指定
-            "com.mysql.cj.jdbc.Driver",   // JDBCドライバー
-            "jdbc:mysql://localhost:3306/sample1",  // JDBC URL
-            "root",  // ユーザー名
-            "root"   // パスワード
-        );
-        
-        //FlatXmlDataSetBuilder を使って、XML形式のテストデータを読み込み
-        //test_data.xml からデータを取得
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("test_data.xml"));
-        //読み込んだデータセットをデータベーステスターに設定
-        databaseTester.setDataSet(dataSet);
-        //テスト前にデータベースをクリーンアップし、新しいデータを挿入する操作を設定
-        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-      //テスト後に全てのデータを削除する操作を設定
-        databaseTester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
-        //設定した内容に基づいてデータベースのセットアップを実行
-        databaseTester.onSetup();
+        DatabaseDBTest.initializeDatabase(); // データベースの初期化を呼び出す
     }
+
+
     @Test
     public void testListSearch() throws Exception {
         InventoryDTO dto = new InventoryDTO();
-        dto.setTradingDate(java.sql.Date.valueOf("2024-09-19")); // テスト用の日付を指定
+        dto.setTradingDate(java.sql.Date.valueOf("2024-09-19"));
 
         List<InventoryDTO> result = dao.select1(dto);
-        assertEquals(1, result.size()); // 期待される結果の行数を指定
-        assertEquals(java.sql.Date.valueOf("2024-09-19"), result.get(0).getTradingDate()); // 期待される日付を確認
+        assertEquals(1, result.size());
+        assertEquals(java.sql.Date.valueOf("2024-09-19"), result.get(0).getTradingDate());
     }
 
     @Test
     public void testListSearchNoResults() throws Exception {
         InventoryDTO dto = new InventoryDTO();
-        dto.setTradingDate(java.sql.Date.valueOf("2024-01-01")); // 存在しない日付を指定
+        dto.setTradingDate(java.sql.Date.valueOf("2024-01-01"));
 
         List<InventoryDTO> result = dao.select1(dto);
-        assertEquals(0, result.size()); // 結果が空であることを確認
+        assertEquals(0, result.size());
     }
-}
+        }
+    }
+

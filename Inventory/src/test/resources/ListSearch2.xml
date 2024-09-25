@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <m_user>
+    <mysql.product_detail>
     <row>
         <ID>1</ID>
-        <USER_NAME>testUser</USER_NAME>
-        <PASSWORD>password</PASSWORD>
-        <AUTHORITY>1</AUTHORITY>
-        </row>
-    </m_user>
-    <product_detail>
-    <row>
         <TRADING_DATE>2024-09-19</TRADING_DATE>
         <JAN_CODE>123456789</JAN_CODE>
         <PRICE>1000</PRICE>
         <INVENTORY_BUY>500</INVENTORY_BUY>
         <INVENTORY_SELL>300</INVENTORY_SELL>
+        <AUTORITY>1</AUTORITY>
+        <DELETE_FRAG>0</DELETE_FRAG>
+        <CREATED_DATE>2024-09-18</CREATED_DATE>
+        <CREATED_NAME>TESTUSER</CREATED_NAME>
+        <UPDATED_DATE>2024-09-18</UPDATED_DATE>
+        <UPDATED_NAME>ADMIN</UPDATED_NAME>
         <PROFIT>200</PROFIT>
         </row>
-    </product_detail>
+    </mysql.product_detail>
 </dataset>
