@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="product_detail">
+        
+        <column>TRADING_DATE</column>
+        <column>JAN_CODE</column>
+        <column>PRICE</column>
+        <column>INVENTORY_BUY</column>
+        <column>INVENTORY_SELL</column>
+        <column>AUTORITY</column>
+        <column>CREATED_DATE</column>
+        <column>CREATED_NAME</column>
+        <column>UPDATED_DATE</column>
+        <column>UPDATED_NAME</column>
+        <column>PROFIT</column>
+        <row>
+        
+        <value>2024-09-19</value>
+        <value>123456789</value>
+        <value>1000</value>
+        <value>500</value>
+        <value>300</value>
+        <value>1</value>
+        <value>0</value>
+        <value>2024-09-18</value>
+        <value>TESTUSER</value>
+        <value>2024-09-18</value>
+        <value>ADMIN</value>
+        <value>200</value>
+        </row>
+        </table>
+</dataset>

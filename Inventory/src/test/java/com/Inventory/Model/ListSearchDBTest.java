@@ -2,13 +2,14 @@ package com.Inventory.Model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.csv.CsvDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class ListSearchDBTest {
 
     static class DatabaseDBTest {
         private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        private static final String JDBC_URL = "jdbc:mysql://localhost:3306/mysql?useSSL=false&serverTimezone=UTC";
+        private static final String JDBC_URL = "jdbc:mysql://localhost:3306/mysql";
         private static final String USER = "root";
         private static final String PASSWORD = "root";
 
@@ -32,15 +33,21 @@ public class ListSearchDBTest {
             Class.forName(JDBC_DRIVER);
             IDatabaseTester databaseTester = new JdbcDatabaseTester(JDBC_DRIVER, JDBC_URL, USER, PASSWORD);
 
-//            databaseTester.getConnection();
-//            IDataSet dataSet = new FlatXmlDataSetBuilder()
-//                    .build(DatabaseDBTest.class.getClassLoader().getResourceAsStream("ListSearch2.xml"));
-
-            File csvFolder = new File(DatabaseDBTest.class.getClassLoader().getResource("csv").toURI());
-            // CSVデータセットのパスを指定
-            IDataSet dataSet = new CsvDataSet(csvFolder);
-            //IDataSet dataSet = new CsvDataSet(DatabaseDBTest.class.getClassLoader().getResourceAsStream("C:\\Users\\terar\\Documents\\java-task4.2\\ListSearchDBTest-TestData.csv"));
+            databaseTester.getConnection();
+            InputStream inputStream = DatabaseDBTest.class.getClassLoader().getResourceAsStream("ListSearch2.xml");
             
+            if (inputStream == null) {
+                throw new FileNotFoundException("ListSearch2.xml not found in classpath");
+            }
+
+            // FlatXmlDataSetBuilderを使用してXMLデータセットを作成
+            FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+            IDataSet dataSet = builder.build(inputStream);
+            
+           
+//            File csvFolder = new File(DatabaseDBTest.class.getClassLoader().getResource("csv").toURI());
+//            // CSVデータセットのパスを指定
+//            IDataSet dataSet = new CsvDataSet(csvFolder);          
             
             databaseTester.setDataSet(dataSet);
             databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
