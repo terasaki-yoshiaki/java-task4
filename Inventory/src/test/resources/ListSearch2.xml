@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <mysql.product_detail>
+    <product_detail>
     <row>
         <ID>1</ID>
         <TRADING_DATE>2024-09-19</TRADING_DATE>
@@ -16,5 +16,5 @@
         <UPDATED_NAME>ADMIN</UPDATED_NAME>
         <PROFIT>200</PROFIT>
         </row>
-    </mysql.product_detail>
+    </product_detail>
 </dataset>

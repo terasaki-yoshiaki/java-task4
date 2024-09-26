@@ -48,33 +48,34 @@ public class ListSearchTest {
     }
 
     @Test
-    //日付検索機能のテストを行うためのテストメソッドを定義
     public void testDateSearch() {
         // Arrange
-    	//モックリストを作成し、その中に日付を設定した InventoryDTO オブジェクトを追加
         InventoryDTO dto = new InventoryDTO();
         dto.setTradingDate(Date.valueOf("2024-09-19"));
 
-     // List<InventoryDTO> 型で定義
         ArrayList<InventoryDTO> mockList = new ArrayList<>();
         InventoryDTO mockInventory = new InventoryDTO();
         mockInventory.setTradingDate(Date.valueOf("2024-09-19"));
         mockList.add(mockInventory);
-        
-        //dao.select1(dto) が呼ばれた場合に、先ほど作成した mockList を返すように設定
+
         when(dao.select1(dto)).thenReturn(mockList);
 
+        // モックオブジェクトの作成
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
+        
+        // セッションに値を設定する場合
+        when(request.getSession()).thenReturn(session);
+        
         // Act
-     // メソッドの実行
-        String viewName = ListSearchController.ListSearch(dto, model);
+        String viewName = listSeachController.ListSearch(dto, model);
 
         // 結果の検証
         assertEquals("InventoryList.html", viewName);
         verify(model).addAttribute("Inventory", mockList);
     }
+
 
     @Test
     //日付検索で結果がない場合のテストメソッドを定義
@@ -117,7 +118,7 @@ public class ListSearchTest {
         // Act
         String result = null;
 		try {
-			result = listSearchController.InventoryList(dto, model, null, null, null);
+			result = listSeachController.InventoryList(dto, model, null, null, null);
 		} catch (ServletException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -144,7 +145,7 @@ public class ListSearchTest {
         // Act
         String result = null;
 		try {
-			result = listSearchController.InventoryList(dto, model, null, null, null);
+			result = listSeachController.InventoryList(dto, model, null, null, null);
 		} catch (ServletException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
