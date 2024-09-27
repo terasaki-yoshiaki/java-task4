@@ -156,6 +156,7 @@ public class ListSearchDBTest5 extends DatabaseTestCase {
 
     @Test
     public void testDecisionWithoutAuthority() throws Exception {
+    	//テストメソッドを実行する前に、listSearchController が null でないことを確認するアサーション
     	assertNotNull("listSearchController should not be null", listSearchController);
     	//モデル、リクエスト、セッションのモックオブジェクトを作成
         Model model = mock(Model.class);
